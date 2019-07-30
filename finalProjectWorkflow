@@ -1,0 +1,39 @@
+										--FINAL PROJECT--
+
+		CHARACTER
+Mouvement 
+	left, right, up, a, d, w and spacebar keys
+
+Health	
+	player should be able to take damage and reduce health
+Sprite
+Animation
+	walking, jumping, taking damage, swing   
+Death
+	calls death screen UI
+	
+
+		ENEMIES
+AI
+	ai that moves towards you (the player)
+Sprite
+
+Animation
+	walking, taking damage, swing
+
+		UI
+
+
+		ITEMS
+items have a drop chance depending on their rarity
+
+some items cant spawn depending on the current level you are, Sadness level cant spawn the (Fire Fists/item)
+
+		LEVELS
+all levels: Sadness, Anger, Fear,
+
+
+		!!!!!FOR FRIDAY!!!!!! 
+-items
+-level design
+-Character mouvement
