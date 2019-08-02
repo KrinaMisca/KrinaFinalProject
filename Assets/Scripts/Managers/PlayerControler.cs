@@ -15,26 +15,26 @@ public class PlayerControler : MonoBehaviour
 	public Transform groundCheck;
 	public float checkRadius;
 	public LayerMask whatIsGround;
-	private int extraJumps;
-	public int extraJumpValue;
+	private int numberOfJumps;
+	public int maxNumbeOfJumps;
 	//--------------------------------------------------//
 
 	private void Start()
 	{
-		extraJumps = extraJumpValue;
+		numberOfJumps = maxNumbeOfJumps;
 		rb = GetComponent<Rigidbody2D>();
 	}
 
 	private void Update()
 	{
 		if (isGrounded == true) {
-			extraJumps = extraJumpValue;
+			numberOfJumps = maxNumbeOfJumps;
 		}
 
-		if (Input.GetKeyDown(KeyCode.UpArrow) && extraJumps > 0) {
+		if (Input.GetKeyDown(KeyCode.UpArrow) && numberOfJumps > 0) {
 			rb.velocity = Vector2.up * jumpForce;
-			extraJumps--;
-		} else if (Input.GetKeyDown(KeyCode.UpArrow) && extraJumps == 0 && isGrounded == true) {
+			numberOfJumps--;
+		} else if (Input.GetKeyDown(KeyCode.UpArrow) && numberOfJumps == 0 && isGrounded == true) {
 			rb.velocity = Vector2.up * jumpForce;
 		}
 		
