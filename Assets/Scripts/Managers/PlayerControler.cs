@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class PlayerControler : MonoBehaviour
 {
-	public float speed;
 	public float jumpForce;
+	public float speed;
 	private float moveInput;
 	private bool facingRight = true;
 	private Rigidbody2D rb;
 
 	//--------Variables for the jumping mechanics--------//
-	private bool isGrounded;
-	public Transform groundCheck;
+	bool isGrounded { get { return Physics2D.Raycast(transform.position, new Vector2(0, -1));} }
 	public float checkRadius;
 	public LayerMask whatIsGround;
 	private int numberOfJumps;
@@ -27,6 +26,7 @@ public class PlayerControler : MonoBehaviour
 
 	private void Update()
 	{
+        Debug.Log(Physics2D.Raycast(transform.position, new Vector2(0, -1)));
 		if (isGrounded == true) {
 			numberOfJumps = maxNumbeOfJumps;
 		}
@@ -34,18 +34,12 @@ public class PlayerControler : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.UpArrow) && numberOfJumps > 0) {
 			rb.velocity = Vector2.up * jumpForce;
 			numberOfJumps--;
-		} else if (Input.GetKeyDown(KeyCode.UpArrow) && numberOfJumps == 0 && isGrounded == true) {
-			rb.velocity = Vector2.up * jumpForce;
-		}
-		
+		} 		
 	}
+
+    //physics for fixed update
 	private void FixedUpdate()
 	{
-		//--------------------Jumping Mechanics--------------------//
-		isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
-
-		//---------------------------------------------------------//
-
 		//--------------------LeftAndRightMovement--------------------//
 		moveInput = Input.GetAxis("Horizontal");
 		rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);

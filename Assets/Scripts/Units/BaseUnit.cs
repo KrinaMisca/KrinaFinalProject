@@ -8,7 +8,6 @@ public class BaseUnit : MonoBehaviour
     #region VARIABLES
     public bool isAlive;
     public int activeWeaponIndex;
-    private TrailRenderer tr;
     #endregion
 
     #region UNIT STATS
@@ -36,9 +35,7 @@ public class BaseUnit : MonoBehaviour
         //tr = GetComponent<TrailRenderer>();
         anim = GetComponent<Animator>();
 
-        //see if needed
-        scale = transform.localScale;
-        scale.x *= -1;
+      
     }
 
     virtual public void UnitUpdate(float dt, Vector2 dir)
@@ -93,8 +90,6 @@ public class BaseUnit : MonoBehaviour
         speedMultiplier = _speedMult;
 
     }
-
-    
 
     public virtual void TakeDamage(float dmg)
     {

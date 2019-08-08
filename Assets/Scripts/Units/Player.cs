@@ -1,18 +1,50 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : BaseUnit
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public int coins;
+    public bool passiveActive = false;
+
+    override public void Init()
     {
-        
+       
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlayerUpdate(InputManager.InputPkg input, float dt)
     {
-        
+
     }
+
+    public void PlayerFixedUpdate(InputManager.InputPkg input, float dt)
+    {
+       
+    }
+
+    override public void Death()
+    {
+      
+
+    }
+
+    override public void MovementAnimations()
+    {
+
+     
+    }
+
+    public void Interact()
+    {
+    }
+
+    public void UseActive()
+    {
+
+    }
+
+    public void SwitchWeapon()
+    {
+
+    }
+    
 }
