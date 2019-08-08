@@ -11,8 +11,15 @@ public class BaseUnit : MonoBehaviour
     #endregion
 
     #region UNIT STATS
-    [Header("Unit Stats:")]
 
+    [System.Serializable]
+    public class BaseInfo
+    {
+
+    }
+    public BaseInfo bi;
+
+    [Header("Unit Stats:")]
     [SerializeField] public float health;
     [SerializeField] public float maxHealth;
     [SerializeField] protected int speed;

@@ -11,7 +11,7 @@ public class PlayerControler : MonoBehaviour
 	private Rigidbody2D rb;
 
 	//--------Variables for the jumping mechanics--------//
-	bool isGrounded { get { return Physics2D.Raycast(transform.position, new Vector2(0, -1));} }
+	bool isGrounded { get { return Physics2D.Raycast(transform.position, new Vector2(0, -1), 1, LayerMask.GetMask("Ground"));} }
 	public float checkRadius;
 	public LayerMask whatIsGround;
 	private int numberOfJumps;
@@ -26,7 +26,7 @@ public class PlayerControler : MonoBehaviour
 
 	private void Update()
 	{
-        Debug.Log(Physics2D.Raycast(transform.position, new Vector2(0, -1)));
+        Debug.Log(Physics2D.Raycast(transform.position, new Vector2(0, -1), 1, LayerMask.GetMask("Ground")).transform?.name);
 		if (isGrounded == true) {
 			numberOfJumps = maxNumbeOfJumps;
 		}
