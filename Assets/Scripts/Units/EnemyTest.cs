@@ -11,7 +11,9 @@ public class EnemyTest : MonoBehaviour
 	private void Update()
 	{
 		transform.Translate(Vector2.right * speed * Time.deltaTime);
-		RaycastHit2D raycastGround = Physics2D.Raycast(isTrigger.position, Vector2.down, 1);
+
+        //makes sure the raycast hits the ground layer
+		RaycastHit2D raycastGround = Physics2D.Raycast(isTrigger.position, Vector2.down, 1, LayerMask.GetMask("Ground"));
 		if (raycastGround.collider == false) {
 			if (isMovingRight == true)
 			{

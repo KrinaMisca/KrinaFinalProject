@@ -10,8 +10,10 @@ public class PlayerControler : MonoBehaviour
 	private bool facingRight = true;
 	private Rigidbody2D rb;
 
-	//--------Variables for the jumping mechanics--------//
-	bool isGrounded { get { return Physics2D.Raycast(transform.position, new Vector2(0, -1), 1, LayerMask.GetMask("Ground"));} }
+    HealthBar healthBar = new HealthBar();
+
+    //--------Variables for the jumping mechanics--------//
+    bool isGrounded { get { return Physics2D.Raycast(transform.position, new Vector2(0, -1), 1, LayerMask.GetMask("Ground"));} }
 	public float checkRadius;
 	public LayerMask whatIsGround;
 	private int numberOfJumps;
@@ -24,8 +26,17 @@ public class PlayerControler : MonoBehaviour
 		rb = GetComponent<Rigidbody2D>();
 	}
 
-	private void Update()
-	{
+    private void Update()
+    {
+
+        
+        // --------------- for the demo Test --------------- //
+        if (Input.GetKeyDown(KeyCode.C)) {
+            //HealthBar healthBar = healthBar;
+           healthBar.TakeDamage(1);
+        }
+        // ------------------------------------------------- //
+
         Debug.Log(Physics2D.Raycast(transform.position, new Vector2(0, -1), 1, LayerMask.GetMask("Ground")).transform?.name);
 		if (isGrounded == true) {
 			numberOfJumps = maxNumbeOfJumps;

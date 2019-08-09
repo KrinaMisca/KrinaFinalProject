@@ -5,41 +5,46 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-	public int health;
-	public int nbHearts;
+    public int health;
+    public int nbHearts;
 
-	//put this on UILinks
-	public Image[] hearts;
-	public Sprite fullHeart;
-	public Sprite emptyHeart;
+    //put this on UILinks
+    public Image[] hearts;
+    public Sprite fullHeart;
+    public Sprite emptyHeart;
 
-	private void Update()
-	{
-		//so it dosent go over the max container of hearth
-		if (health > nbHearts)
-		{
-			health = nbHearts;
-		}
+    private void Update()
+    {
+        //so it dosent go over the max container of hearth
+        if (health > nbHearts)
+        {
+            health = nbHearts;
+        }
 
 
-		for (int i = 0; i < hearts.Length; i++)
-		{
-			if (i < health)
-			{
-				hearts[i].sprite = fullHeart;
-			}
-			else
-			{
-				hearts[i].sprite = emptyHeart;
-			}
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            if (i < health)
+            {
+                hearts[i].sprite = fullHeart;
+            }
+            else
+            {
+                hearts[i].sprite = emptyHeart;
+            }
 
-			if (i < nbHearts)
-			{
-				hearts[i].enabled = true;
-			}
-			else {
-				hearts[i].enabled = false;
-			}
-		}
-	}
+            if (i < nbHearts)
+            {
+                hearts[i].enabled = true;
+            }
+            else {
+                hearts[i].enabled = false;
+            }
+        }
+    }
+
+    //temporary damage function
+    public void TakeDamage(int dmg) {
+        health -= dmg;
+    }
 }
