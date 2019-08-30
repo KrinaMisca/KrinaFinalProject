@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class EnemyTest : MonoBehaviour
 {
+	public int health;
 	public float speed;
 	private bool isMovingRight = true;
 	public Transform isTrigger;
 
 	private void Update()
 	{
+
+		if (health <= 0) {
+			Destroy(gameObject);
+		}
+
+
 		transform.Translate(Vector2.right * speed * Time.deltaTime);
 
         //makes sure the raycast hits the ground layer
@@ -28,5 +35,10 @@ public class EnemyTest : MonoBehaviour
 			
 		}
 	}
-	
+
+	public void EnemyTakeDamage(int damage)
+	{
+		health -= damage;
+		Debug.Log("Damage Taken");
+	}
 }
