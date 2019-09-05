@@ -9,6 +9,7 @@ public class PlayerControler : MonoBehaviour
     private float moveInput;
     private bool facingRight = true;
     private Rigidbody2D rb;
+    private Animator animator;
 
     HealthBar healthBar = new HealthBar();
 
@@ -84,5 +85,10 @@ public class PlayerControler : MonoBehaviour
         Vector3 scaler = transform.localScale;
         scaler.x *= -1;
         transform.localScale = scaler;
+        if (!facingRight) {
+            transform.position = new Vector2(transform.position.x + 3.92f, transform.position.y);
+        } else if (facingRight) {
+            transform.position = new Vector2(transform.position.x - 3.92f, transform.position.y);
+        }
     }
 }

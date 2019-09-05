@@ -7,7 +7,7 @@ public class EnemyTest : MonoBehaviour
 	public int health;
 	public float speed;
 	private bool isMovingRight = true;
-	public Transform isTrigger;
+	public Transform triggerSideChange;
 
 	private void Update()
 	{
@@ -20,7 +20,7 @@ public class EnemyTest : MonoBehaviour
 		transform.Translate(Vector2.right * speed * Time.deltaTime);
 
         //makes sure the raycast hits the ground layer
-		RaycastHit2D raycastGround = Physics2D.Raycast(isTrigger.position, Vector2.down, 1, LayerMask.GetMask("Ground"));
+		RaycastHit2D raycastGround = Physics2D.Raycast(triggerSideChange.position, Vector2.down, 1, LayerMask.GetMask("Ground"));
 		if (raycastGround.collider == false) {
 			if (isMovingRight == true)
 			{
