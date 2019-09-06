@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerControler : MonoBehaviour
 {
     public float jumpForce;
@@ -23,6 +24,8 @@ public class PlayerControler : MonoBehaviour
 
     //--------------------------------------------------//
 
+    public LayerMask switchLayer;
+
     //--------------------AttackTest------------------//
     public Transform positionOfAttack;
     public float attackRange;
@@ -41,14 +44,28 @@ public class PlayerControler : MonoBehaviour
     private void Update()
     {
         // --------- ATTACK TEST --------- //
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Mouse0)) {
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+        {
 
             Collider2D[] enemiesToOuch = Physics2D.OverlapCircleAll(positionOfAttack.position, attackRange, whatIsEnemy);
-            for (int i = 0; i < enemiesToOuch.Length; i++) {
+            for (int i = 0; i < enemiesToOuch.Length; i++)
+            {
                 enemiesToOuch[i].GetComponent<EnemyTest>().EnemyTakeDamage(damage);
             }
         }
         // ------------------------------- // 
+
+
+        // --------- LEVEL SWITCH TEST --------- //
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            Physics2D.OverlapCircleAll(positionOfAttack.position, attackRange, switchLayer);
+            
+        }
+        // ------------------------------------- //
+
+
+
 
 
         // --------------- for the demo Test --------------- //
@@ -65,7 +82,7 @@ public class PlayerControler : MonoBehaviour
             numberOfJumps = maxNumbeOfJumps;
         }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow) && numberOfJumps > 0 || Input.GetKeyDown(KeyCode.Space) && numberOfJumps > 0)
+        if (Input.GetKeyDown(KeyCode.UpArrow) && numberOfJumps > 0 || Input.GetKeyDown(KeyCode.W) && numberOfJumps > 0)
         {
             animator.SetTrigger("takeOff");
             rb.velocity = Vector2.up * jumpForce;
@@ -82,8 +99,8 @@ public class PlayerControler : MonoBehaviour
         }
     }
 
-	//physics for fixed update
-	private void FixedUpdate()
+    //physics for fixed update
+    private void FixedUpdate()
     {
         //--------------------LeftAndRightMovement--------------------//
         moveInput = Input.GetAxis("Horizontal");
@@ -108,12 +125,6 @@ public class PlayerControler : MonoBehaviour
         }
         //----------------------------------------------------------//
     }
-
-    public void SwitchLevels()
-    {
-
-    }
-
 
     private void Flip()
     {
