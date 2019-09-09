@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public int health;
-    public int nbHearts;
+    int health = 3;
+    //public int nbHearts;
 
     //put this on UILinks
     public Image[] hearts;
-    public Sprite fullHeart;
-    public Sprite emptyHeart;
-
+    //public Sprite fullHeart;
+    //public Sprite emptyHeart;
+    /*
     private void Update()
     {
         //so it dosent go over the max container of hearth
@@ -41,10 +41,12 @@ public class HealthBar : MonoBehaviour
                 hearts[i].enabled = false;
             }
         }
-    }
+    }*/
 
     //temporary damage function
     public void TakeDamage(int dmg) {
         health -= dmg;
+        if(health >= 0)
+            hearts[health].gameObject.SetActive(false);
     }
 }

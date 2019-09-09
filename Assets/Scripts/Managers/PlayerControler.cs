@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class PlayerControler : MonoBehaviour
 {
+    int health = 3;
     public float jumpForce;
     public float speed;
     private float moveInput;
@@ -12,7 +14,11 @@ public class PlayerControler : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
 
-    HealthBar healthBar = new HealthBar();
+    public HealthBar healthBar;
+    float timeLastDmg;
+
+    //PlayerControler player;
+
 
     //--------Variables for the jumping mechanics--------//
     bool isGrounded { get { return Physics2D.Raycast(body.position, new Vector2(0, -1), 3, LayerMask.GetMask("Ground")); } }
@@ -60,7 +66,7 @@ public class PlayerControler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             Physics2D.OverlapCircleAll(positionOfAttack.position, attackRange, switchLayer);
-            
+
         }
         // ------------------------------------- //
 
@@ -134,11 +140,30 @@ public class PlayerControler : MonoBehaviour
         transform.localScale = scaler;
         if (!facingRight)
         {
-            transform.position = new Vector2(transform.position.x, transform.position.y);
+            transform.position = new Vector2(transform.position.x - GetMagicFixNumber(), transform.position.y);
         }
         else if (facingRight)
         {
-            transform.position = new Vector2(transform.position.x, transform.position.y);
+            transform.position = new Vector2(transform.position.x + GetMagicFixNumber(), transform.position.y);
+        }
+    }
+
+    private float GetMagicFixNumber()
+    {
+        return 26.15f;
+    }
+
+    public void PlayerTakeDamage(int damage)
+    {
+        if (Time.time - timeLastDmg > 1)
+        {
+            timeLastDmg = Time.time;
+            health -= damage;
+            healthBar.TakeDamage(damage);
+            if (health <= 0)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
         }
     }
 }
